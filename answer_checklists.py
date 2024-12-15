@@ -7,7 +7,9 @@ from collections import defaultdict
 from typing import Optional
 import fire
 from tqdm import tqdm
-from utils import ANSWER_FLAG, CHECKLIST_DIR, GEN_BATCH_SIZE, call_api, gcfs, get_api_client
+import logging
+from const import ANSWER_FLAG, CHECKLIST_DIR, GEN_BATCH_SIZE
+from inference import call_api, gcfs, get_api_client
 
 def main(
     data_file: str,
@@ -21,6 +23,7 @@ def main(
     template_file: str = "checklist_evaluator_template.md",
     save_file: Optional[str] = None,
 ):
+    logger = logging.getLogger("checklists")
     # open data w/ instructions, generations and unanswered checklists
     logger.info("Answering checklists for HEHE data.")
     if not data_file.endswith(".json"):
