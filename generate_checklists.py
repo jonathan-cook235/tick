@@ -6,7 +6,9 @@ import json
 from typing import Optional
 import fire
 from tqdm import tqdm
-from utils import ANSWER_FLAG, GEN_BATCH_SIZE, PROMPT_DIR, call_api, gcfs, get_api_client, logger
+from const import ANSWER_FLAG, GEN_BATCH_SIZE, PROMPT_DIR
+import logging
+from inference import call_api, gcfs, get_api_client
 
 def format_checklist(qs_raw: str) -> list:
     """
@@ -26,6 +28,7 @@ def main(
     answer_flag: str = ANSWER_FLAG,
     template_path: str = "prompt_templates/checklist_generator_template.md",
 ):
+    logger = logging.getLogger("checklists")
     subsets = subsets.split(",")
     for subset in subsets:
         logger.info(f"Generating checklists for HEHE6 {subset}.")
