@@ -7,7 +7,8 @@ from collections import defaultdict
 from typing import Optional
 import fire
 from tqdm import tqdm
-from human_eval.utils import ANSWER_FLAG, CHECKLIST_DIR, GEN_BATCH_SIZE, call_api, gcfs, get_api_client
+from utils import ANSWER_FLAG, CHECKLIST_DIR, GEN_BATCH_SIZE, call_api, gcfs, get_api_client
+
 def main(
     data_file: str,
     provider: str,
@@ -92,5 +93,6 @@ def main(
         save_path = data_path
     with gcfs().open(save_path, "w") as f:
         json.dump(data, f)
+        
 if __name__ == "__main__":
     fire.Fire(main)
